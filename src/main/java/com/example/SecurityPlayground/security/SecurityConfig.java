@@ -3,10 +3,12 @@ package com.example.SecurityPlayground.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
+//@EnableGlobalAuthentication
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
@@ -16,6 +18,9 @@ public class SecurityConfig {
         http.authorizeHttpRequests(auth ->{
             auth.requestMatchers("/api/v1/open/greeting").permitAll();
             auth.requestMatchers("/api/v1/protected/greeting").authenticated();
+            auth.requestMatchers("/api/v1/protected/test").authenticated();
+            auth.requestMatchers("/api/v1/protected/test2").authenticated();
+            auth.requestMatchers("/api/v1/protected/test3").authenticated();
         }).oauth2Login(Customizer.withDefaults());
 
         return http.build();
