@@ -1,5 +1,7 @@
 package com.example.SecurityPlayground.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,8 +16,8 @@ public class Controller {
     }
 
     @GetMapping("/protected/greeting")
-    public  String greetingFamiliar(){
-        return "hi, how are you doing today";
+    public  String greetingFamiliar(@AuthenticationPrincipal User user){
+        return String.format("Hi %s, \nhow are you doing today?", user.getUsername());
     }
 
 
